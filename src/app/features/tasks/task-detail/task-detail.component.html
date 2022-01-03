@@ -1,1 +1,24 @@
-<p>task-detail works!</p>
+<section>
+  <h2>Create/ edit</h2>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select task Type</mat-label>
+    <mat-select
+      name="type"
+      [formControl]="typeControl"
+    >
+      <mat-option>Choose task</mat-option>
+      <mat-option
+        *ngFor="let taskType of taskTypes"
+        [value]="taskType.value"
+      >
+        {{taskType.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-dynamic-form
+    #form
+    [formFields]="dynamicForm"
+  ></app-dynamic-form>
+</section>

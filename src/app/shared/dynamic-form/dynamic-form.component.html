@@ -1,0 +1,15 @@
+<form
+  *ngIf="hasFormControls"
+  novalidate
+  [formGroup]="form"
+>
+  <ng-container
+    *ngFor="let field of formFields"
+    class="row"
+  >
+    <app-dynamic-form-field
+      [fieldSettings]="field"
+      [formParent]="form"
+    ></app-dynamic-form-field>
+  </ng-container>
+</form>

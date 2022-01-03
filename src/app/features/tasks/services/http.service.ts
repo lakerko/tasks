@@ -11,7 +11,15 @@ export class HttpService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
+  getTask(id: string): Observable<GenericTask> {
+    return this.httpClient.get<GenericTask>(`${this.baseUrl}/tasks/${id}`);
+  }
+
   getTasks(): Observable<GenericTask[]> {
     return this.httpClient.get<GenericTask[]>(`${this.baseUrl}/tasks`);
+  }
+
+  deleteTask(taskId: string): Observable<any> {
+    return this.httpClient.delete(`${this.baseUrl}/tasks/${taskId}`);
   }
 }

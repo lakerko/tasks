@@ -1,3 +1,18 @@
 table {
   width: 100%;
 }
+
+.actions-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  & > *:not(:last-child) {
+    margin-right: 1rem;
+  }
+}
+
+.mat-row:hover {
+  filter: brightness(95%);
+  cursor: pointer;
+}

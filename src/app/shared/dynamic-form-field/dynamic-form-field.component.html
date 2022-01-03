@@ -1,0 +1,38 @@
+<ng-container
+  *ngIf="formParent"
+  [formGroup]="formParent"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ fieldSettings.label }}</mat-label>
+
+    <ng-container [ngSwitch]="fieldSettings.componentType">
+      
+      <input
+        *ngSwitchCase="'input'"
+        matInput
+        [id]="fieldSettings.key"
+        [formControlName]="fieldSettings.key"
+        [type]="fieldSettings.inputType"
+      />
+
+      <mat-select
+        *ngSwitchCase="'combobox'"
+        [id]="fieldSettings.key"
+        [formControlName]="fieldSettings.key"
+      >
+        <mat-option
+          *ngFor="let option of fieldSettings.options"
+          [value]="option.value"
+        >{{ option.label }}</mat-option>
+      </mat-select>
+    </ng-container>
+
+    <ng-container *ngFor="let validator of fieldSettings.validators">
+      <mat-error *ngIf="isInvalid && hasErrorProperty(validator)">
+        {{ validator.message || 'Please, fix the issue' }}
+      </mat-error>
+    </ng-container>
+
+  </mat-form-field>
+
+</ng-container>
