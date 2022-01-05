@@ -13,8 +13,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
-import { exhaustMap, filter, takeUntil } from 'rxjs/operators';
+
+import { Observable } from 'rxjs';
+import {
+  exhaustMap,
+  filter,
+  map,
+  shareReplay,
+  takeUntil,
+} from 'rxjs/operators';
 
 import { HttpService } from '../services/http.service';
 import { TaskDefinitionsService } from '../services/task-definitions.service';
@@ -35,6 +44,13 @@ export class TasksListComponent implements AfterViewInit, OnDestroy {
   @ViewChild('actionsRef') actionsRef!: TemplateRef<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  
+  public isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe([Breakpoints.Handset])
+    .pipe(
+      map((result) => result.matches),
+      shareReplay(),
+    );
 
   public displayedColumns: string[] = [ 'name', 'type', 'actions' ];
   public pageSizeOptions: number[] = [10, 25, 50, 100];
@@ -50,6 +66,7 @@ export class TasksListComponent implements AfterViewInit, OnDestroy {
     private readonly router: Router,
     private readonly vcr: ViewContainerRef,
     private readonly fb: FormBuilder,
+    private readonly breakpointObserver: BreakpointObserver,
     private readonly httpService: HttpService,
     private readonly dialogService: DialogService,
     private readonly portalService: PortalService,

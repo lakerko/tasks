@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { DynamicFormFieldComponent } from './dynamic-form-field/dynamic-form-field.component';
@@ -29,6 +30,7 @@ const modules = [
   MatInputModule,
   MatSelectModule,
   MatCardModule,
+  FlexLayoutModule,
 ];
 
 @NgModule({

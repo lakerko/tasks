@@ -1,11 +1,22 @@
 <section>
-  <header>
-    <h2>List of tasks</h2>
+  <header
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+    fxLayoutGap="24px"
+    fxFill
+  >
+    <h2 fxFlex="initial">List of tasks</h2>
     <form
       novalidate
+      fxLayoutGap="8px"
+      fxLayoutGap.gt-sm="16px"
+      fxFlex
       [formGroup]="tableFilter"
     >
-      <mat-form-field appearance="standard">
+      <mat-form-field
+        appearance="standard"
+        fxFlex
+      >
         <mat-label> Filter task by name </mat-label>
         <input
           matInput
@@ -15,7 +26,10 @@
         />
       </mat-form-field>
 
-      <mat-form-field appearance="standard">
+      <mat-form-field
+        appearance="standard"
+        fxFlex
+      >
         <mat-label> Filter task by type </mat-label>
         <mat-select
           formControlName="type"
@@ -71,29 +85,56 @@
           *matCellDef="let element"
         >
           <div class="actions-container">
-            <button
-              color="primary"
-              mat-button
-              (click)="editTask(element._id)"
-            >
-              <mat-icon
-                aria-hidden="false"
-                aria-label="Edit task icon"
-              >edit</mat-icon>
-              Edit
-            </button>
+            <ng-container *ngIf="(isHandset$ | async); else isBigScreen">
+              <button
+                color="primary"
+                mat-icon-button
+                (click)="editTask(element._id)"
+              >
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Edit task icon"
+                >edit</mat-icon>
+              </button>
 
-            <button
-              color="warn"
-              mat-button
-              (click)="deleteTask(element._id)"
-            >
-              <mat-icon
-                aria-hidden="false"
-                aria-label="Delete task icon"
-              >delete</mat-icon>
-              Delete
-            </button>
+              <button
+                color="warn"
+                mat-icon-button
+                (click)="deleteTask(element._id)"
+              >
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Delete task icon"
+                >delete</mat-icon>
+              </button>
+            </ng-container>
+
+            <ng-template #isBigScreen>
+              <button
+                color="primary"
+                mat-button
+                (click)="editTask(element._id)"
+              >
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Edit task icon"
+                >edit</mat-icon>
+                Edit
+              </button>
+
+              <button
+                color="warn"
+                mat-button
+                (click)="deleteTask(element._id)"
+              >
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Delete task icon"
+                >delete</mat-icon>
+                Delete
+              </button>
+            </ng-template>
+            
           </div>
         </td>
       </ng-container>
