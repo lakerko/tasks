@@ -2,14 +2,14 @@
   *ngIf="hasFormControls"
   novalidate
   [formGroup]="form"
+  (ngSubmit)="onSubmit()"
 >
-  <ng-container
-    *ngFor="let field of formFields"
-    class="row"
-  >
-    <app-dynamic-form-field
-      [fieldSettings]="field"
-      [formParent]="form"
-    ></app-dynamic-form-field>
-  </ng-container>
+
+  <app-dynamic-form-field
+    *ngFor="let field of formFields; trackBy: trackByKeyFn"
+    [fieldSettings]="field"
+    [formParent]="form"
+  ></app-dynamic-form-field>
+
+  <ng-content></ng-content>
 </form>

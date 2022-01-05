@@ -7,13 +7,13 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { DialogService } from './dialog.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
@@ -22,38 +22,19 @@ export class HttpInterceptorService implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.warn('req', req);
     return next
       .handle(req)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          if (error instanceof HttpErrorResponse) {
-            switch(error.status) {
-              case 404: {
-                console.log('!!!!error', error);
-                this.dialogService.openSnackBar(`Error occured. ${this.getErrorMessage(req.method)}`);
-                return of(error as any);
-              }
-              default: {
-                return of(error as any);
-              }
-            }
+          if (error instanceof HttpErrorResponse && error.status >= 500) {
+            this.dialogService.openSnackBar(`Server unavailable.`);
           }
-          return of(error as any);
-          // return throwError(error as HttpEvent<any>);
+          if (error.status === 404 && !error.error.statusCode) {
+            this.dialogService.openSnackBar(`Network error, please check your connection.`);
+          }
+          return throwError(() => error);
         })
       );
-  }
-
-  getErrorMessage(method: string): string {
-    switch(method) {
-      case 'DELETE': {
-        return `Task couldn't be deleted`;
-      }
-      default: {
-        return '';
-      }
-    }
   }
 
 }

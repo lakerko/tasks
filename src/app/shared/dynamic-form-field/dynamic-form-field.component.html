@@ -10,6 +10,7 @@
       <input
         *ngSwitchCase="'input'"
         matInput
+        autocomplete="off"
         [id]="fieldSettings.key"
         [formControlName]="fieldSettings.key"
         [type]="fieldSettings.inputType"
@@ -21,16 +22,18 @@
         [formControlName]="fieldSettings.key"
       >
         <mat-option
-          *ngFor="let option of fieldSettings.options"
+          *ngFor="let option of fieldSettings.options; trackBy: trackByValueFn"
           [value]="option.value"
         >{{ option.label }}</mat-option>
       </mat-select>
     </ng-container>
 
-    <ng-container *ngFor="let validator of fieldSettings.validators">
+    <ng-container *ngFor="let validator of fieldSettings.validators; trackBy: trackByTypeFn">
+
       <mat-error *ngIf="isInvalid && hasErrorProperty(validator)">
         {{ validator.message || 'Please, fix the issue' }}
       </mat-error>
+      
     </ng-container>
 
   </mat-form-field>

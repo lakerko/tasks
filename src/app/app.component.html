@@ -1,6 +1,22 @@
 <mat-toolbar color="primary">
-  <h1>Tasks</h1>
+  <a [routerLink]="['/tasks']">
+    <h1>Tasks</h1>
+  </a>
+
+  <div class="separator"></div>
+  
+  <ng-template [cdkPortalOutlet]="portalService.actionsPortal | async"></ng-template>
 </mat-toolbar>
+
+<mat-progress-bar
+  *ngIf="loadingService.isLoading$ | async; else noLoading"
+  color="accent"
+  mode="indeterminate"
+></mat-progress-bar>
+
+<ng-template #noLoading>
+  <div class="prevent-jump"></div>
+</ng-template>
 
 <main>
   <router-outlet></router-outlet>

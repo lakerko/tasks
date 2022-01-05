@@ -16,3 +16,16 @@ table {
   filter: brightness(95%);
   cursor: pointer;
 }
+
+.mat-column-name {
+  width: 50%;
+}
+
+.mat-column-type {
+  width: 35%;
+}
+
+.mat-column-actions {
+  width: 35%;
+  min-width: 200px;
+}

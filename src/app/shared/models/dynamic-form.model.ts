@@ -27,3 +27,8 @@ export interface DynamicValidator {
   value?: any;
   message?: string;
 }
+
+export interface FieldBaseOption {
+  value: string | number;
+  label: string;
+}

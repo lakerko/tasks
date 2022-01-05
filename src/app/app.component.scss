@@ -1,3 +1,23 @@
 main {
   padding: 1rem;
 }
+
+.separator {
+  margin: 0 2rem;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+
+  &:active,
+  &:focus,
+  &:visited {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.prevent-jump {
+  height: 4px;
+}

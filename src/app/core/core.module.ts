@@ -7,16 +7,20 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { PortalModule } from '@angular/cdk/portal';
 
 import { HttpInterceptorService } from './services/http-interceptor.service';
 
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 
 @NgModule({
   declarations: [
     ConfirmDialogComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +31,17 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatDialogModule,
     MatSnackBarModule,
     MatButtonModule,
+    MatProgressBarModule,
+    PortalModule,
+  ],
+  exports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    
+    MatProgressBarModule,
+    PortalModule,
+
+    PageNotFoundComponent,
   ],
   providers: [
     {

@@ -12,13 +12,17 @@ export class DynamicFormService {
     const formGroup: { [key: string]: FormControl } = {};
 
     dynamicFields.forEach((field) => {
-      const validators = (field.validators || []).map((validator: DynamicValidator) => validator.value
-        ? Validators[validator.type](validator.value)
-        : Validators[validator.type]);
-
-      formGroup[field.key] = new FormControl(field.value, validators as ValidatorFn[]);
+      formGroup[field.key] = new FormControl(field.value, this.getValidators(field.validators));
     });
 
     return new FormGroup(formGroup);
+  }
+
+  private getValidators(validators: DynamicValidator[] | undefined): ValidatorFn[] | [] {
+    if (!validators) return [];
+
+    return validators.map((validator) => validator.value
+      ? Validators[validator.type](validator.value) as ValidatorFn[]
+      : Validators[validator.type]) as ValidatorFn[];
   }
 }

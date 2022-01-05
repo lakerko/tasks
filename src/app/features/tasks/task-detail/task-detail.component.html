@@ -1,24 +1,54 @@
 <section>
-  <h2>Create/ edit</h2>
+  <mat-card class="mat-elevation-z8">
+    <mat-card-header>
+      <mat-card-title>{{ task ? 'Edit Task' : 'Create Task' }}</mat-card-title>
+    </mat-card-header>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Select task Type</mat-label>
-    <mat-select
-      name="type"
-      [formControl]="typeControl"
-    >
-      <mat-option>Choose task</mat-option>
-      <mat-option
-        *ngFor="let taskType of taskTypes"
-        [value]="taskType.value"
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Select task Type</mat-label>
+        <mat-select
+          name="type"
+          [formControl]="typeControl"
+        >
+          <mat-option>Choose task</mat-option>
+          <mat-option
+            *ngFor="let taskType of taskTypes"
+            [value]="taskType"
+          >
+            {{taskType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <app-dynamic-form
+        #form
+        [formFields]="dynamicForm"
+        (onSubmitForm)="onSubmit($event)"
       >
-        {{taskType.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+        <button
+          color="primary"
+          type="submit"
+          mat-raised-button
+        >{{ task ? 'Save changes' : 'Create Task' }}</button>
+      </app-dynamic-form>
 
-  <app-dynamic-form
-    #form
-    [formFields]="dynamicForm"
-  ></app-dynamic-form>
+    </mat-card-content>
+  </mat-card>
+
 </section>
+
+<ng-template #actionsRef>
+
+  <a
+    mat-raised-button
+    [routerLink]="['/tasks']"
+  >
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Go back icon"
+    >arrow_back</mat-icon>
+    Back to list
+  </a>
+
+</ng-template>

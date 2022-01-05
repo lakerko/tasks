@@ -1,4 +1,9 @@
-import { DynamicValidator, FieldComponent, InputTypes } from "../models/dynamic-form.model";
+import {
+  DynamicValidator,
+  FieldBaseOption,
+  FieldComponent,
+  InputTypes,
+} from "../models/dynamic-form.model";
 
 export class FieldBase {
   public key: string;
@@ -6,10 +11,7 @@ export class FieldBase {
   public label?: string;
   public componentType?: FieldComponent;
   public inputType: InputTypes;
-  public options?: {
-    value: string | number,
-    label: string,
-  }[];
+  public options?: FieldBaseOption[];
   public validators?: DynamicValidator[];
 
   constructor(settings: {
