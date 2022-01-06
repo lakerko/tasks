@@ -2,7 +2,10 @@
   *ngIf="formParent"
   [formGroup]="formParent"
 >
-  <mat-form-field appearance="outline">
+  <mat-form-field
+    *ngIf="fieldSettings.componentType !== 'datepicker'; else isDatePicker"
+    appearance="outline"
+  >
     <mat-label>{{ fieldSettings.label }}</mat-label>
 
     <ng-container [ngSwitch]="fieldSettings.componentType">
@@ -26,6 +29,7 @@
           [value]="option.value"
         >{{ option.label }}</mat-option>
       </mat-select>
+
     </ng-container>
 
     <ng-container *ngFor="let validator of fieldSettings.validators; trackBy: trackByTypeFn">
@@ -37,5 +41,30 @@
     </ng-container>
 
   </mat-form-field>
+
+  <ng-template #isDatePicker>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ fieldSettings.label }}</mat-label>
+      <input
+        matInput
+        [id]="fieldSettings.key"
+        [formControlName]="fieldSettings.key"
+        [matDatepicker]="picker"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+
+      <ng-container *ngFor="let validator of fieldSettings.validators; trackBy: trackByTypeFn">
+
+        <mat-error *ngIf="isInvalid && hasErrorProperty(validator)">
+          {{ validator.message || 'Please, fix the issue' }}
+        </mat-error>
+        
+      </ng-container>
+    </mat-form-field>
+  </ng-template>
 
 </ng-container>

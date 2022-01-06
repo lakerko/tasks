@@ -11,6 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
@@ -30,6 +32,8 @@ const modules = [
   MatInputModule,
   MatSelectModule,
   MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
   FlexLayoutModule,
 ];
 

@@ -1,6 +1,7 @@
 export enum FieldComponent {
   INPUT = 'input',
   COMBOBOX = 'combobox',
+  DATE = 'datepicker',
 }
 
 export enum InputTypes {

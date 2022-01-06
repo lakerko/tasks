@@ -23,6 +23,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TaskTableFilterComponent } from '../task-table-filter/task-table-filter.component';
+import { TaskTableComponent } from '../task-table/task-table.component';
 
 describe('TasksListComponent', () => {
   let component: TasksListComponent;
@@ -30,7 +32,11 @@ describe('TasksListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TasksListComponent ],
+      declarations: [
+        TasksListComponent,
+        TaskTableFilterComponent,
+        TaskTableComponent,
+      ],
       imports: [
         RouterModule,
         HttpClientModule,

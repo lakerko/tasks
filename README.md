@@ -25,3 +25,13 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Adding new input type to dynamic form
+* Add the component type to `dynamic-form.model.ts` - enum `FieldComponent`
+* Add the component type into `field-definitions` folder, with new file representing the component type
+* Add the component type to the `createFormFieldsArray` method of `task-definitions.service`
+* Implement template for the input type into `switch/if` case of `dynamic-form-field.component.html`
+
+## Adding new task type with its definition
+* Add the task type into `task-definitions` folder, with new file representing the task type
+* Add the new task type to `tasks` map of `task-definitions.service`

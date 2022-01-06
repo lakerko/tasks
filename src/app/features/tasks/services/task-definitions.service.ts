@@ -2,18 +2,21 @@ import { Injectable } from '@angular/core';
 
 import { FieldBase } from "src/app/shared/field-definitions/field-base";
 import { FieldCombobox } from "src/app/shared/field-definitions/field-combobox";
+import { FieldDate } from 'src/app/shared/field-definitions/field-date';
 import { FieldInput } from "src/app/shared/field-definitions/field-input";
 
 import { AngularValidators, FieldComponent, InputTypes } from "src/app/shared/models/dynamic-form.model";
 import { TasksDefinitions, TaskFields, TaskPayload } from '../models/tasks.model';
+import { CleanBathroomDefinition } from '../task-definitions/clean-bathroom';
 import { VaccumCleanDefinition } from '../task-definitions/vacuum-clean';
 import { WashDishesDefinition } from '../task-definitions/wash-dishes';
 
 @Injectable()
 export class TaskDefinitionsService {
-  private tasks: TasksDefinitions = {
+  tasks: TasksDefinitions = {
     'wash-dishes': WashDishesDefinition,
     'vacuum-clean': VaccumCleanDefinition,
+    'clean-bathroom': CleanBathroomDefinition,
   };
 
   getListOfTasks(): string[] {
@@ -73,6 +76,9 @@ export class TaskDefinitionsService {
         }
         case FieldComponent.COMBOBOX: {
           return new FieldCombobox(fieldConfig);
+        }
+        case FieldComponent.DATE: {
+          return new FieldDate(fieldConfig);
         }
         default: {
           return new FieldInput(fieldConfig);

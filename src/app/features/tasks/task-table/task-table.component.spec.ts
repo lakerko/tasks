@@ -1,5 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+
 import { TaskTableComponent } from './task-table.component';
 
 describe('TableComponent', () => {
@@ -8,7 +14,18 @@ describe('TableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskTableComponent ]
+      declarations: [
+        TaskTableComponent,
+      ],
+      imports: [
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatButtonModule,
+      ],
+      providers: [
+        BreakpointObserver,
+      ],
     })
     .compileComponents();
   });
