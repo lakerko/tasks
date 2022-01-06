@@ -6,156 +6,18 @@
     fxFill
   >
     <h2 fxFlex="initial">List of tasks</h2>
-    <form
-      novalidate
-      fxLayoutGap="8px"
-      fxLayoutGap.gt-sm="16px"
+    <app-task-table-filter
       fxFlex
-      [formGroup]="tableFilter"
-    >
-      <mat-form-field
-        appearance="standard"
-        fxFlex
-      >
-        <mat-label> Filter task by name </mat-label>
-        <input
-          matInput
-          autocomplete="off"
-          type="text"
-          formControlName="name"
-        />
-      </mat-form-field>
-
-      <mat-form-field
-        appearance="standard"
-        fxFlex
-      >
-        <mat-label> Filter task by type </mat-label>
-        <mat-select
-          formControlName="type"
-        >
-          <mat-option value="">No type</mat-option>
-          <mat-option
-            *ngFor="let taskType of taskTypes"
-            [value]="taskType"
-          >{{ taskType }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
+      (onFilterChange)="setFilter($event)"
+    ></app-task-table-filter>
   </header>
 
-  <div class="mat-elevation-z8">
-    <table
-      mat-table
-      matSort
-      [dataSource]="dataSource"
-    >
-
-      <ng-container matColumnDef="name">
-        <th
-          mat-header-cell
-          mat-sort-header
-          *matHeaderCellDef
-        > Name </th>
-        <td
-          mat-cell
-          *matCellDef="let element"
-        > {{element.name}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="type">
-        <th
-          mat-header-cell
-          mat-sort-header
-          *matHeaderCellDef
-        > Type </th>
-        <td
-          mat-cell
-          *matCellDef="let element"
-        > {{element.type}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="actions">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-        > Actions </th>
-        <td
-          mat-cell
-          *matCellDef="let element"
-        >
-          <div class="actions-container">
-            <ng-container *ngIf="(isHandset$ | async); else isBigScreen">
-              <button
-                color="primary"
-                mat-icon-button
-                (click)="editTask(element._id)"
-              >
-                <mat-icon
-                  aria-hidden="false"
-                  aria-label="Edit task icon"
-                >edit</mat-icon>
-              </button>
-
-              <button
-                color="warn"
-                mat-icon-button
-                (click)="deleteTask(element._id)"
-              >
-                <mat-icon
-                  aria-hidden="false"
-                  aria-label="Delete task icon"
-                >delete</mat-icon>
-              </button>
-            </ng-container>
-
-            <ng-template #isBigScreen>
-              <button
-                color="primary"
-                mat-button
-                (click)="editTask(element._id)"
-              >
-                <mat-icon
-                  aria-hidden="false"
-                  aria-label="Edit task icon"
-                >edit</mat-icon>
-                Edit
-              </button>
-
-              <button
-                color="warn"
-                mat-button
-                (click)="deleteTask(element._id)"
-              >
-                <mat-icon
-                  aria-hidden="false"
-                  aria-label="Delete task icon"
-                >delete</mat-icon>
-                Delete
-              </button>
-            </ng-template>
-            
-          </div>
-        </td>
-      </ng-container>
-
-      <tr
-        mat-header-row
-        *matHeaderRowDef="displayedColumns"
-      ></tr>
-      <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns;"
-      ></tr>
-    </table>
-
-    <mat-paginator
-      showFirstLastButtons
-      aria-label="Select page of tasks"
-      [pageSize]="10"
-      [pageSizeOptions]="pageSizeOptions"
-    ></mat-paginator>
-  </div>
+  <app-task-table
+    [tableData]="tasksData"
+    [filterValue]="filterValue"
+    (onEditTask)="editTask($event)"
+    (onDeleteTask)="deleteTask($event)"
+  ></app-task-table>
 </section>
 
 <ng-template #actionsRef>

@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-row:hover {
+  filter: brightness(95%);
+  cursor: pointer;
+}
+
+.mat-column-name {
+  width: 50%;
+}
+
+.mat-column-type {
+  width: 35%;
+}
+
+.mat-column-actions {
+  width: 35%;
+}
+
+.mat-paginator {
+  border-bottom: 1px solid rgba(0,0,0,.12);
+}

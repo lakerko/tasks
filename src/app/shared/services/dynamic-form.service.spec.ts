@@ -6,7 +6,11 @@ describe('DynamicFormService', () => {
   let service: DynamicFormService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        DynamicFormService,
+      ]
+    });
     service = TestBed.inject(DynamicFormService);
   });
 

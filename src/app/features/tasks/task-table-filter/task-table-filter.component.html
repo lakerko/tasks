@@ -1,0 +1,35 @@
+<form
+  fxLayoutGap="8px"
+  fxLayoutGap.gt-sm="16px"
+  novalidate
+  [formGroup]="tableFilter"
+>
+  <mat-form-field
+    appearance="standard"
+    fxFlex
+  >
+    <mat-label> Filter task by name </mat-label>
+    <input
+      matInput
+      autocomplete="off"
+      type="text"
+      formControlName="name"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    appearance="standard"
+    fxFlex
+  >
+    <mat-label> Filter task by type </mat-label>
+    <mat-select
+      formControlName="type"
+    >
+      <mat-option value="">No type</mat-option>
+      <mat-option
+        *ngFor="let taskType of taskTypes"
+        [value]="taskType"
+      >{{ taskType }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
