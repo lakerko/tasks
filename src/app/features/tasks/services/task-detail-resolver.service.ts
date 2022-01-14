@@ -11,15 +11,15 @@ import { GenericTask } from '../models/tasks.model';
 import { HttpService } from './http.service';
 
 @Injectable()
-export class TaskDetailResolverService implements Resolve<GenericTask | undefined>{
+export class TaskDetailResolverService implements Resolve<GenericTask | null>{
 
   constructor(
     private readonly httpService: HttpService,
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): GenericTask | Observable<GenericTask> | Promise<GenericTask> | Observable<undefined> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): GenericTask | Observable<GenericTask> | Promise<GenericTask> | Observable<null> {
     if (!route.params['id']) {
-      return of();
+      return of(null);
     }
     return this.httpService.getTask(route.params['id']);
   }

@@ -57,6 +57,7 @@ export class TaskDetailComponent implements AfterViewInit, OnDestroy {
         this.dynamicForm = this.taskDefinitionsService.getTaskFormFields(type, this.getTaskValues());
       });
 
+    // namiesto tohoto
     this.activatedRoute.data
       .pipe(
         takeUntil(this.destroy$),
@@ -69,6 +70,11 @@ export class TaskDetailComponent implements AfterViewInit, OnDestroy {
           this.typeControl.setValue((this.task).type);
         }
       });
+    // tu mohlo byt radsej toto
+    // this.task = this.activatedRoute.snapshot.data['task'];
+    // if (this.task) {
+    //   this.typeControl.setValue((this.task).type);
+    // }
   }
 
   ngAfterViewInit(): void {

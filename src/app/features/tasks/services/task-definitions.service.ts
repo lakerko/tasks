@@ -8,14 +8,14 @@ import { FieldInput } from "src/app/shared/field-definitions/field-input";
 import { AngularValidators, FieldComponent, InputTypes } from "src/app/shared/models/dynamic-form.model";
 import { TasksDefinitions, TaskFields, TaskPayload } from '../models/tasks.model';
 import { CleanBathroomDefinition } from '../task-definitions/clean-bathroom';
-import { VaccumCleanDefinition } from '../task-definitions/vacuum-clean';
+import { VacuumCleanDefinition } from '../task-definitions/vacuum-clean';
 import { WashDishesDefinition } from '../task-definitions/wash-dishes';
 
 @Injectable()
 export class TaskDefinitionsService {
   tasks: TasksDefinitions = {
     'wash-dishes': WashDishesDefinition,
-    'vacuum-clean': VaccumCleanDefinition,
+    'vacuum-clean': VacuumCleanDefinition,
     'clean-bathroom': CleanBathroomDefinition,
   };
 

@@ -1,7 +1,7 @@
 import { AngularValidators, InputTypes } from "src/app/shared/models/dynamic-form.model";
 import { TaskDefinition } from "../models/tasks.model";
 
-export const VaccumCleanDefinition: TaskDefinition = {
+export const VacuumCleanDefinition: TaskDefinition = {
   fields: {
     who: {
       inputType: InputTypes.TEXT,
